@@ -23,6 +23,7 @@ describe('Order.js', () => {
     const wrapper = shallow(<Order 
       order={order}
     />);
+    expect(getDate).toHaveBeenCalledTimes(1);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -30,6 +31,7 @@ describe('Order.js', () => {
     const wrapper = shallow(<Order 
       bober={{}}
     />);
+    expect(getDate).toHaveBeenCalledTimes(1);
     expect(wrapper.getElement()).toEqual(null);
   });
 
@@ -38,7 +40,8 @@ describe('Order.js', () => {
     const wrapper = shallow(<Order 
       order={{}}
     />);
-
+  
+    expect(getDate).toHaveBeenCalledTimes(1);
     expect(wrapper.getElement()).toEqual(null);
   });
 });
