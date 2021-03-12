@@ -75,7 +75,7 @@ describe('sortByDate function', () => {
 		expect(result).toEqual(-1);
 	});
 
-	
+
 	test.each([
 		[null, null, 0],
 		[1, 2, 0],
@@ -111,22 +111,26 @@ describe('getSortFunction function', () => {
 describe('SortOrders function', () => {
 	it('Sort DESC', () => {
 		const desc_input = [
-			{date: new Date("1990-12-17T03:24:00")},
-			{date: new Date("1996-12-17T03:24:00")},
+			1,
+			2
 		];
 
 		const acs_input = [
-			{date: new Date("1996-12-17T03:24:00")},
-			{date: new Date("1990-12-17T03:24:00")},
+			2,
+			1,
 		];
 
 		const expected = [
-			{date: new Date("1996-12-17T03:24:00")},
-			{date: new Date("1990-12-17T03:24:00")},
-		];
+			2,
+			1,
+		];	
 
-		sortOrders(acs_input, sortByDate);
-		sortOrders(desc_input, sortByDate);
+		const fn = jest.fn((l_value, r_value) => {
+			return r_value - l_value;
+		});
+	
+		sortOrders(acs_input, fn);
+		sortOrders(desc_input, fn);
 
 		expect(acs_input).toEqual(expected);
 		expect(desc_input).toEqual(expected);
