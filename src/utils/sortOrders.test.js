@@ -132,6 +132,8 @@ describe('SortOrders function', () => {
 		sortOrders(acs_input, fn);
 		sortOrders(desc_input, fn);
 
+		expect(fn).toBeCalledTimes(2);
+
 		expect(acs_input).toEqual(expected);
 		expect(desc_input).toEqual(expected);
 	});
