@@ -104,38 +104,29 @@ describe('getSortFunction function', () => {
 	it('Return undefined', () => {
 		const result = getSortFunction(1);
 
-		expect(result).toEqual(undefined);  // != 
+		expect(result).toBeUndefined();  // != 
 	});
 });
 
 describe('SortOrders function', () => {
-	it('Sort DESC', () => {
-		const desc_input = [
-			1,
-			2
-		];
+	it('Check function call', () => {
+		const desc_input = [1, 2];
+		const fn = jest.fn();
 
-		const acs_input = [
-			2,
-			1,
-		];
-
-		const expected = [
-			2,
-			1,
-		];	
-
-		const fn = jest.fn((l_value, r_value) => {
-			return r_value - l_value;
-		});
-	
-		sortOrders(acs_input, fn);
 		sortOrders(desc_input, fn);
+		expect(fn).toBeCalledTimes(1);
+	});
 
-		expect(fn).toBeCalledTimes(2);
+	it('Check null input array', function () {
+		const fn = jest.fn();
+		sortOrders(null, fn);
+		expect(fn).not.toBeCalled();
+	});
 
-		expect(acs_input).toEqual(expected);
-		expect(desc_input).toEqual(expected);
+	it('Check null input function', function () {
+		const input = [2, 1];
+		sortOrders(input, null);
+		expect(input).toEqual(input);
 	});
 });
 
